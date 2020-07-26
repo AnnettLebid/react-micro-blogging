@@ -30,9 +30,11 @@ body {
   padding: 15px 10px 10px 20px;
   font-size: 15px;
   color: #cccccc;
-  background-color: #1d222b;
+  background: #15202b;
+  /* background-color: #1d222b; */
+  border-radius: 10px;
   border: none;
-  outline: none;  
+  outline: none;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -55,7 +57,7 @@ body {
   padding: 11px;
 }
 
-.button:focus{
+.button:focus {
   outline: none;
 }
 
@@ -71,4 +73,61 @@ body {
   align-items: center;
   text-align: center;
   display: flex;
+}
+
+.list-style {
+  list-style: none;
+  padding-left: 0;
+}
+
+.tweet-box {
+  position: relative;
+  width: 600px;
+  height: 100px;
+  background: #343a40;
+  border-radius: 6px;
+  color: white;
+  padding: 10px;
+  margin-top: 20px;  
+}
+
+.date-position {
+  position: absolute;
+  width: 180px;
+  height: 16px;
+  right: 20px;
+  top: 20px;
+
+  display: flex;
+  align-items: center;
+  text-align: right;
+}
+
+.name-position {
+  position: absolute;
+  width: 162px;
+  height: 12px;
+  left: 20px;
+  top: 20px;
+
+  display: flex;
+  align-items: center;
+}
+
+.font-16-14 {
+  font-size: 14px;
+  line-height: 16px;  
+}
+
+.color-grey {
+  color: #6c757d;
+}
+
+.tweet-text {
+  position: absolute;
+  width: 455px;
+  height: 32px;
+  left: 20px;
+  top: 48px;
+  color: #ffffff;
 }
