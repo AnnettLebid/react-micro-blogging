@@ -128,3 +128,37 @@ body {
   top: 48px;
   color: #ffffff;
 }
+
+.navbar {  
+  width: 1076px;
+  height: 58px;
+  left: 65px;
+  text-align: center;
+  top: 0px;
+  background: #343A40;
+  border-radius: 6px;  
+}
+
+a:link {
+  text-decoration: none;
+  color: #FFFFFF !important;; 
+}
+
+
+.home-menu {
+  position: absolute;
+  width: 38px;
+  height: 16px;
+  left: 36px;
+  top: 19px;
+  color: #FFFFFF !important;
+}
+
+.profile-menu {
+  position: absolute; 
+  width: 41px;
+  height: 16px;
+  left: 119px;
+  top: 19px;
+  color: rgba(255, 255, 255, 0.5);
+}
