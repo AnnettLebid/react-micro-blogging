@@ -1,38 +1,74 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  width: 100%;
+  background: #15202b;
   color: white;
+  font-family: "Roboto", sans-serif;
 }
 
-.App-link {
-  color: #61dafb;
+.tweet-form {
+  width: 600px;
+  height: 180px;
+  /* left: 367px;
+  top: 5px; */
+  border: 2px solid #cccccc;
+  box-sizing: border-box;
+  border-radius: 6px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tweet-input {
+  width: 100%;
+  min-width: 250px;
+  padding: 15px 10px 10px 20px;
+  font-size: 15px;
+  color: #cccccc;
+  background-color: #1d222b;
+  border: none;
+  outline: none;  
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.button {
+  position: absolute;
+  width: 68px;
+  height: 34px;
+  left: 530px;
+  top: 125px;
+
+  background: #007bff;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  border: none;
+  padding: 11px;
+}
+
+.button:focus{
+  outline: none;
+}
+
+.alert-box {
+  position: absolute;
+  left: 30px;
+  top: 130px;
+  width: 338px;
+  height: 29px;
+  padding: 1px;
+  font-size: 14px;
+  line-height: 19px;
+  align-items: center;
+  text-align: center;
+  display: flex;
 }
