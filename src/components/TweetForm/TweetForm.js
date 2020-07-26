@@ -8,16 +8,19 @@ export default class TweetForm extends React.Component {
         text: "",
         name: "",
         date: "",
-      },
+      },     
+      disableButton: false,
+      maxLength: false,    
     };
   }
 
   handleOnSubmit(event) {
     event.preventDefault();
     console.log("I work");
-    // if (!this.state.text) {
-    //   return;
-    // }
+    if (!this.state.text) {
+      return;
+    }
+    
     this.props.handleOnNewTweet({
       text: this.state.text,
       name: "Anna Lebid",
@@ -28,9 +31,18 @@ export default class TweetForm extends React.Component {
 
   handleChange(event) {
     this.setState({ text: event.target.value });
+    const numbOfChar = event.target.value.length;    
+    if (numbOfChar > 140) {
+      this.setState({
+        disableButton: true,
+        maxLength: true,
+      });
+    }      
   }
 
   render() {
+  const { disableButton, maxLength } = this.state;
+
     return (
       <form
         className="tweet-form"
@@ -45,15 +57,17 @@ export default class TweetForm extends React.Component {
           cols="40"
           placeholder="What you have in mind..."
         />
-        <button name="submit" className="btn-primary button">
+        <button name="submit" className=" button btn-primary"
+        aria-disabled="true"
+        disabled={disableButton}>             
           Tweet
         </button>
-        {/* {numberOfChar > 140 && (
+        {(maxLength)  && 
           <div className="alert alert-danger alert-box" role="alert">
             The tweet can't contain more then 140 chracters!
           </div>
-        )} */}
-      </form>
+        }
+      </form>      
     );
   }
 }

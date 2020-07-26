@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-function TweetList(props) {
+function TweetsList(props) {
   const { tweets } = props;
 
   return (
@@ -18,4 +18,4 @@ function TweetList(props) {
   );
 }
 
-export default TweetList;
+export default TweetsList;
