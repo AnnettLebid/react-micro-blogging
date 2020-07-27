@@ -19,8 +19,7 @@ export default class Wrapper extends React.Component {
         tweets: [newTweet, ...state.tweets],
       };
     });
-    localStorage.setItem("tweets", JSON.stringify(this.state.tweets));
-    // console.log(localStorage.getItem("tweets"));
+    localStorage.setItem("tweets", JSON.stringify(this.state.tweets));   
   }
 
   componentDidMount() {        
