@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import TweetForm from "../TweetForm/TweetForm";
 import TweetList from "../TweetsList/TweetsList";
+import { getTweets } from "../lib/api";
 
 export default class Wrapper extends React.Component {
   constructor(props) {
@@ -19,22 +20,19 @@ export default class Wrapper extends React.Component {
         tweets: [newTweet, ...state.tweets],
       };
     });
-    localStorage.setItem("tweets", JSON.stringify(this.state.tweets));   
   }
 
-  componentDidMount() {        
-    const savedTweets = JSON.parse(window.localStorage.getItem("tweets"));
-    if (savedTweets) {
-      this.setState(() => {
-        return {
-          tweets: savedTweets,
-        };
-      });
-    }
+  componentDidMount() {
+    getTweets().then((response) => {
+      const { data } = response;
+      
+      this.setState({ tweets: data.tweets });
+    });
   }
 
   render() {
     const { tweets } = this.state;
+    console.log(tweets)
 
     return (
       <Container className="p-5">
