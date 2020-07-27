@@ -19,33 +19,35 @@ export default class Wrapper extends React.Component {
         tweets: [newTweet, ...state.tweets],
       };
     });
+    localStorage.setItem("tweets", JSON.stringify(this.state.tweets));
+    // console.log(localStorage.getItem("tweets"));
+  }
+
+  componentDidMount() {        
+    const savedTweets = JSON.parse(window.localStorage.getItem("tweets"));
+    if (savedTweets) {
+      this.setState(() => {
+        return {
+          tweets: savedTweets,
+        };
+      });
+    }
   }
 
   render() {
-const { tweets } = this.state;
+    const { tweets } = this.state;
 
     return (
       <Container className="p-5">
-        <Row className="justify-content-md-center">
+        <Row className="justify-content-center">
           <Col>
             <TweetForm
               handleOnNewTweet={(newTweet) => this.handleOnNewTweet(newTweet)}
             />
-            <TweetList tweets = {tweets}/>
+            <TweetList tweets={tweets} />
           </Col>
         </Row>
       </Container>
     );
   }
 }
-
-// const mockedData = [
-//   { text: "1", name: "Anna Lebid", date: "1" },
-//   { text: "2", name: "Anna Lebid", date: "2" },
-
-//   { text: "3", name: "Anna Lebid", date: "3" },
-
-//   { text: "4", name: "Anna Lebid", date: "4" },
-
-//   { text: "5", name: "Anna Lebid", date: "5" },
-// ];

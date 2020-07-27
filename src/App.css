@@ -32,7 +32,8 @@ body {
   /* background-color: #1d222b; */
   border-radius: 10px;
   border: none;
-  outline: none;  
+  outline: none; 
+  resize: none;
 }
 
 .button {
