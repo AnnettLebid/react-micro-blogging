@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import TweetForm from "../TweetForm/TweetForm";
 import TweetList from "../TweetsList/TweetsList";
 import { getTweets } from "../lib/api";
+import { createTweet } from "../lib/api";
 
 export default class Wrapper extends React.Component {
   constructor(props) {
@@ -20,6 +21,10 @@ export default class Wrapper extends React.Component {
         tweets: [newTweet, ...state.tweets],
       };
     });
+    console.log(newTweet)
+    createTweet(newTweet).then(response => {
+      console.log(response)
+    }).catch(error => (console.log(error)))
   }
 
   componentDidMount() {

@@ -1,47 +1,46 @@
 import React from "react";
+import { createTweet } from "../lib/api";
 
 export default class TweetForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       newTweet: {
-        text: "",
-        name: "",
-        date: "",
-      },     
+        content: "",
+      },
       disableButton: false,
-      maxLength: false,    
+      maxLength: false,
     };
   }
 
   handleOnSubmit(event) {
     event.preventDefault();
     console.log("I work");
-    if (!this.state.text) {
+    if (!this.state.content) {
       return;
     }
-    
     this.props.handleOnNewTweet({
-      text: this.state.text,
-      name: "Anna Lebid",
+      content: this.state.content,
       date: new Date().toISOString(),
-      id: Date.now(),
+      userName: "Anna Lebid",
+      // id: Date.now(),
     });
+    console.log(this.state);
   }
 
   handleChange(event) {
-    this.setState({ text: event.target.value });
-    const numbOfChar = event.target.value.length;    
+    this.setState({ content: event.target.value });
+    const numbOfChar = event.target.value.length;
     if (numbOfChar > 140) {
       this.setState({
         disableButton: true,
         maxLength: true,
       });
-    }      
+    }
   }
 
   render() {
-  const { disableButton, maxLength } = this.state;
+    const { disableButton, maxLength } = this.state;
 
     return (
       <form
@@ -57,17 +56,20 @@ export default class TweetForm extends React.Component {
           cols="40"
           placeholder="What you have in mind..."
         />
-        <button name="submit" className=" button btn-primary"
-        aria-disabled="true"
-        disabled={disableButton}>             
+        <button
+          name="submit"
+          className=" button btn-primary"
+          aria-disabled="true"
+          disabled={disableButton}
+        >
           Tweet
         </button>
-        {(maxLength)  && 
+        {maxLength && (
           <div className="alert alert-danger alert-box" role="alert">
             The tweet can't contain more then 140 chracters!
           </div>
-        }
-      </form>      
+        )}
+      </form>
     );
   }
 }

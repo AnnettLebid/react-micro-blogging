@@ -6,7 +6,7 @@ function TweetsList(props) {
   return (
     <ul className="list-style">
       {tweets.map((tweet) => (
-        <li key={tweet.id}>
+        <li key={tweet.id || tweet.date}>
           <div className = "tweet-box">
             <span className="date-position font-16-14 color-grey">{tweet.date}</span>
             <span className="name-position font-16-14 color-grey">{tweet.userName}</span>

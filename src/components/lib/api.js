@@ -8,5 +8,5 @@ export function getTweets() {
 
 
 export function createTweet(newTweet) {
-    return axios.post(`${url}/tweet`, { tweet: newTweet});
+    return axios.post(`${url}/tweet`,  newTweet );
 }
