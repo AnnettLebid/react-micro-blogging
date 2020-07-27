@@ -165,7 +165,10 @@ a:link {
 }
 
 
-.loader {
-  color: white;
-  justify-content: center;
+.loader { 
+  float: left
+}
+
+.error {
+  text-align: center;
 }

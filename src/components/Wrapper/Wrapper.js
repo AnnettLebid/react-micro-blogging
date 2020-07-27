@@ -4,7 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import TweetForm from "../TweetForm/TweetForm";
 import TweetList from "../TweetsList/TweetsList";
-import Loader from "../Loader/Loader"
+import Loader from "../Loader/Loader";
 import { getTweets } from "../lib/api";
 import { createTweet } from "../lib/api";
 
@@ -14,20 +14,22 @@ export default class Wrapper extends React.Component {
     this.state = {
       tweets: [],
       loading: false,
+      errorMessage: "",
     };
-    console.log(this.state.loading);
   }
 
-  handleOnNewTweet(newTweet) {    
-    this.setState({ loading: true });   
-    createTweet(newTweet).then((response) => {
-      this.setState({
-        tweets: [newTweet, ...this.state.tweets],
-        loading: false,
+  handleOnNewTweet(newTweet) {
+    this.setState({ loading: true });
+    createTweet(newTweet)
+      .then((response) => {
+        this.setState({
+          tweets: [newTweet, ...this.state.tweets],
+          loading: false,
+        });
+      })
+      .catch((err) => {
+        this.setState({ errorMessage: err.message, loading: false });
       });
-    });
-    console.log(this.state.loading);
-   
   }
 
   componentDidMount() {
@@ -42,14 +44,19 @@ export default class Wrapper extends React.Component {
 
     return (
       <Container className="p-5">
-        <Row className="justify-content-center">         
-          <Col xs={12} s = {12} md={11} lg = {7}>
+        <Row className="justify-content-center">
+          <Col xs={12} s={12} md={11} lg={7}>
             <TweetForm
-              handleOnNewTweet={(newTweet) => this.handleOnNewTweet(newTweet)}            
+              handleOnNewTweet={(newTweet) => this.handleOnNewTweet(newTweet)}
             />
+            <div className = "loader text-center">
             {loading && <Loader />}
+            </div>
+            {this.state.errorMessage && (
+              <h3 className="error"> {this.state.errorMessage} </h3>
+            )}
             <TweetList tweets={tweets} />
-            </Col>       
+          </Col>
         </Row>
       </Container>
     );

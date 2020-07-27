@@ -15,7 +15,6 @@ export default class TweetForm extends React.Component {
   }
 
   handleOnSubmit(event) {
-    console.log("handleOnSubmit")
     event.preventDefault();    
     if (!this.state.content) {
       return;
@@ -23,14 +22,12 @@ export default class TweetForm extends React.Component {
     this.props.handleOnNewTweet({
       content: this.state.content,
       date: new Date().toISOString(),
-      userName: "Anna Lebid",
+      userName: null,
       // id: Date.now(),
-    });
-    // console.log(this.state);
+    });    
   }
 
-  handleChange(event) {
-    console.log("handleChange")
+  handleChange(event) {    
     this.setState({ content: event.target.value });
     const numbOfChar = event.target.value.length;
     if (numbOfChar > 140) {
@@ -75,10 +72,7 @@ export default class TweetForm extends React.Component {
               The tweet can't contain more then 140 chracters!
             </div>
           )}
-        </form>
-        {loading && <div className = "mt-2 text-center">
-          <Spinner animation="border" variant="light" />
-        </div>}
+        </form>      
       </>
     );
   }
