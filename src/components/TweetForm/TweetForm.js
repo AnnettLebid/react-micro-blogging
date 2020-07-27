@@ -1,5 +1,5 @@
 import React from "react";
-import { createTweet } from "../lib/api";
+import Spinner from "react-bootstrap/Spinner";
 
 export default class TweetForm extends React.Component {
   constructor(props) {
@@ -10,12 +10,13 @@ export default class TweetForm extends React.Component {
       },
       disableButton: false,
       maxLength: false,
+      
     };
   }
 
   handleOnSubmit(event) {
-    event.preventDefault();
-    console.log("I work");
+    console.log("handleOnSubmit")
+    event.preventDefault();    
     if (!this.state.content) {
       return;
     }
@@ -25,10 +26,11 @@ export default class TweetForm extends React.Component {
       userName: "Anna Lebid",
       // id: Date.now(),
     });
-    console.log(this.state);
+    // console.log(this.state);
   }
 
   handleChange(event) {
+    console.log("handleChange")
     this.setState({ content: event.target.value });
     const numbOfChar = event.target.value.length;
     if (numbOfChar > 140) {
@@ -40,36 +42,44 @@ export default class TweetForm extends React.Component {
   }
 
   render() {
-    const { disableButton, maxLength } = this.state;
+    const { disableButton, maxLength, loading } = this.state;  
+    console.log() 
 
     return (
-      <form
-        className="tweet-form"
-        onSubmit={(event) => this.handleOnSubmit(event)}
-      >
-        <textarea
-          name="message"
-          value={this.state.value}
-          onChange={(event) => this.handleChange(event)}
-          className="tweet-input"
-          rows="5"
-          cols="40"
-          placeholder="What you have in mind..."
-        />
-        <button
-          name="submit"
-          className=" button btn-primary"
-          aria-disabled="true"
-          disabled={disableButton}
+      <>
+        <form
+          className="tweet-form"
+          onSubmit={(event) => this.handleOnSubmit(event)}
         >
-          Tweet
-        </button>
-        {maxLength && (
-          <div className="alert alert-danger alert-box" role="alert">
-            The tweet can't contain more then 140 chracters!
+          <textarea
+            name="message"
+            value={this.state.value}
+            onChange={(event) => this.handleChange(event)}
+            className="tweet-input"
+            rows="4"
+            cols="40"
+            placeholder="What you have in mind..."
+          />
+          <div className = "display-flex text-right p-2">
+          <button
+            name="submit"
+            className=" button btn-primary"
+            aria-disabled="true"
+            disabled={disableButton}
+          >
+            Tweet
+          </button>
           </div>
-        )}
-      </form>
+          {maxLength && (
+            <div className="alert alert-danger alert-box" role="alert">
+              The tweet can't contain more then 140 chracters!
+            </div>
+          )}
+        </form>
+        {loading && <div className = "mt-2 text-center">
+          <Spinner animation="border" variant="light" />
+        </div>}
+      </>
     );
   }
 }

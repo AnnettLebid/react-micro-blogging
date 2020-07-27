@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import TweetForm from "../TweetForm/TweetForm";
 import TweetList from "../TweetsList/TweetsList";
+import Loader from "../Loader/Loader"
 import { getTweets } from "../lib/api";
 import { createTweet } from "../lib/api";
 
@@ -12,42 +13,43 @@ export default class Wrapper extends React.Component {
     super(props);
     this.state = {
       tweets: [],
+      loading: false,
     };
+    console.log(this.state.loading);
   }
 
-  handleOnNewTweet(newTweet) {
-    this.setState((state) => {
-      return {
-        tweets: [newTweet, ...state.tweets],
-      };
+  handleOnNewTweet(newTweet) {    
+    this.setState({ loading: true });   
+    createTweet(newTweet).then((response) => {
+      this.setState({
+        tweets: [newTweet, ...this.state.tweets],
+        loading: false,
+      });
     });
-    console.log(newTweet)
-    createTweet(newTweet).then(response => {
-      console.log(response)
-    }).catch(error => (console.log(error)))
+    console.log(this.state.loading);
+   
   }
 
   componentDidMount() {
     getTweets().then((response) => {
       const { data } = response;
-      
       this.setState({ tweets: data.tweets });
     });
   }
 
   render() {
-    const { tweets } = this.state;
-    console.log(tweets)
+    const { tweets, loading } = this.state;
 
     return (
       <Container className="p-5">
-        <Row className="justify-content-center">
-          <Col>
+        <Row className="justify-content-center">         
+          <Col xs={12} s = {12} md={11} lg = {7}>
             <TweetForm
-              handleOnNewTweet={(newTweet) => this.handleOnNewTweet(newTweet)}
+              handleOnNewTweet={(newTweet) => this.handleOnNewTweet(newTweet)}            
             />
+            {loading && <Loader />}
             <TweetList tweets={tweets} />
-          </Col>
+            </Col>       
         </Row>
       </Container>
     );
