@@ -1,5 +1,4 @@
 import React from "react";
-import Spinner from "react-bootstrap/Spinner";
 
 export default class TweetForm extends React.Component {
   constructor(props) {
@@ -9,8 +8,7 @@ export default class TweetForm extends React.Component {
         content: "",
       },
       disableButton: false,
-      maxLength: false,
-      
+      maxLength: false      
     };
   }
 
@@ -22,7 +20,7 @@ export default class TweetForm extends React.Component {
     this.props.handleOnNewTweet({
       content: this.state.content,
       date: new Date().toISOString(),
-      userName: null,
+      userName: JSON.parse(window.localStorage.getItem("userName"))
       // id: Date.now(),
     });    
   }
@@ -39,8 +37,7 @@ export default class TweetForm extends React.Component {
   }
 
   render() {
-    const { disableButton, maxLength, loading } = this.state;  
-    console.log() 
+    const { disableButton, maxLength } = this.state;     
 
     return (
       <>

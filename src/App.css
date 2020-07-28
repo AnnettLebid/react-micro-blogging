@@ -12,7 +12,6 @@ body {
   background: #15202b;
   color: white;
   font-family: "Roboto", sans-serif;
- 
 }
 
 .tweet-form {
@@ -33,11 +32,11 @@ body {
   /* background-color: #1d222b; */
   border-radius: 10px;
   border: none;
-  outline: none; 
+  outline: none;
   resize: none;
 }
 
-.button { 
+.button {
   width: 68px;
   height: 34px;
 
@@ -52,7 +51,7 @@ body {
   text-align: center;
   color: #ffffff;
   border: none;
-  padding: 5px; 
+  padding: 5px;
 }
 
 .button:focus {
@@ -86,7 +85,7 @@ body {
   border-radius: 6px;
   color: white;
   padding: 10px;
-  margin-top: 20px;  
+  margin-top: 20px;
 }
 
 .date-position {
@@ -114,7 +113,7 @@ body {
 
 .font-16-14 {
   font-size: 14px;
-  line-height: 16px;  
+  line-height: 16px;
 }
 
 .color-grey {
@@ -130,21 +129,20 @@ body {
   color: #ffffff;
 }
 
-.navbar {  
-  width: 1076px;
+.navbar {
+  /* width: 1076px; */
   height: 58px;
   left: 65px;
   text-align: center;
   top: 0px;
-  background: #343A40;
-  border-radius: 6px;  
+  background: #343a40;
+  border-radius: 6px;
 }
 
 a:link {
   text-decoration: none;
-  color: #FFFFFF !important;; 
+  color: #ffffff !important;
 }
-
 
 .home-menu {
   position: absolute;
@@ -152,11 +150,11 @@ a:link {
   height: 16px;
   left: 36px;
   top: 19px;
-  color: #FFFFFF !important;
+  color: #ffffff !important;
 }
 
 .profile-menu {
-  position: absolute; 
+  position: absolute;
   width: 41px;
   height: 16px;
   left: 119px;
@@ -164,11 +162,25 @@ a:link {
   color: rgba(255, 255, 255, 0.5);
 }
 
-
-.loader { 
-  float: left
+.loader {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  z-index: 100;
 }
 
 .error {
   text-align: center;
+}
+
+.profile-header {
+  font-size: 36px;
+  line-height: 42px;
+  color: #FFFFFF;
+}
+
+.profile-user-name {
+  font-size: 18px;
+  line-height: 21px;
+  color: rgba(255, 255, 255, 0.8);
 }
