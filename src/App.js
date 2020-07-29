@@ -2,7 +2,7 @@ import React from "react";
 import NavigationBar from "./components/Navbar/Navbar";
 import Wrapper from "./components/Wrapper/Wrapper";
 import UserProfile from "./pages/UserProfile";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
 

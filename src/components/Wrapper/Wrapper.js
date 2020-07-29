@@ -7,6 +7,7 @@ import TweetList from "../TweetsList/TweetsList";
 import Loader from "../Loader/Loader";
 import { getTweets } from "../lib/api";
 import { createTweet } from "../lib/api";
+import TweetsContext from "../../TweetsContext";
 
 export default class Wrapper extends React.Component {
   constructor(props) {
@@ -40,25 +41,25 @@ export default class Wrapper extends React.Component {
   }
 
   render() {
-    const { tweets, loading } = this.state;
+    const { loading } = this.state;   
 
     return (
-      <Container className="p-5">
-        <Row className="justify-content-center">
-          <Col xs={12} s={12} md={11} lg={7}>
-            <TweetForm
-              handleOnNewTweet={(newTweet) => this.handleOnNewTweet(newTweet)}
-            />
-            <div className = "loader text-center">
-            {loading && <Loader />}
-            </div>
-            {this.state.errorMessage && (
-              <h3 className="error"> {this.state.errorMessage} </h3>
-            )}
-            <TweetList tweets={tweets} />
-          </Col>
-        </Row>
-      </Container>
+      <TweetsContext.Provider value={{ tweets: this.state.tweets }}>
+        <Container className="p-5">
+          <Row className="justify-content-center">
+            <Col xs={12} s={12} md={11} lg={7}>
+              <TweetForm
+                handleOnNewTweet={(newTweet) => this.handleOnNewTweet(newTweet)}
+              />
+              <div className="loader text-center">{loading && <Loader />}</div>
+              {this.state.errorMessage && (
+                <h3 className="error"> {this.state.errorMessage} </h3>
+              )}
+              <TweetList />
+            </Col>
+          </Row>
+        </Container>
+      </TweetsContext.Provider>
     );
   }
 }
