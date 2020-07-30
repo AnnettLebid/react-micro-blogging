@@ -1,76 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
+import TweetsContext from "../../TweetsContext";
 
-export default class TweetForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      newTweet: {
-        content: "",
-      },
-      disableButton: false,
-      maxLength: false      
-    };
-  }
+const TweetForm = ({ handleOnNewTweet }) => {
+  const [newContent, setNewContent] = useState("");
+  const [disabledButton, updateDisabledButton] = useState(false);
+  const [maxLength, updateMaxLength] = useState(false);
 
-  handleOnSubmit(event) {
-    event.preventDefault();    
-    if (!this.state.content) {
+  // static contextType = TweetsContext;
+
+  const handleOnSubmit = async (event) => {
+    event.preventDefault();
+    if (!newContent) {
       return;
     }
-    this.props.handleOnNewTweet({
-      content: this.state.content,
+    handleOnNewTweet ({
+      content: newContent,
       date: new Date().toISOString(),
-      userName: JSON.parse(window.localStorage.getItem("userName"))
-      // id: Date.now(),
-    });    
-  }
+      userName: JSON.parse(window.localStorage.getItem("userName")),
+    });
+    setNewContent("");
+  };
 
-  handleChange(event) {    
-    this.setState({ content: event.target.value });
+  const handleChange = (event) => {
+    setNewContent(event.target.value);
     const numbOfChar = event.target.value.length;
     if (numbOfChar > 140) {
-      this.setState({
-        disableButton: true,
-        maxLength: true,
-      });
+      updateMaxLength(true);
+      updateDisabledButton(true);
     }
-  }
+  };
 
-  render() {
-    const { disableButton, maxLength } = this.state;     
+  // const { disableButton, maxLength } = this.state;
 
-    return (
-      <>
-        <form
-          className="tweet-form"
-          onSubmit={(event) => this.handleOnSubmit(event)}
+  return (
+    <form
+      className="tweet-form"
+      onSubmit={handleOnSubmit}
+    >
+      <textarea
+        name="message"
+        value={newContent}
+        onChange={handleChange}
+        className="tweet-input"
+        rows="4"
+        cols="40"
+        placeholder="What you have in mind..."
+      />
+      <div className="display-flex text-right p-2">
+        <button
+          name="submit"
+          className=" button btn-primary"
+          aria-disabled="true"
+          disabled={disabledButton}
         >
-          <textarea
-            name="message"
-            value={this.state.value}
-            onChange={(event) => this.handleChange(event)}
-            className="tweet-input"
-            rows="4"
-            cols="40"
-            placeholder="What you have in mind..."
-          />
-          <div className = "display-flex text-right p-2">
-          <button
-            name="submit"
-            className=" button btn-primary"
-            aria-disabled="true"
-            disabled={disableButton}
-          >
-            Tweet
-          </button>
-          </div>
-          {maxLength && (
-            <div className="alert alert-danger alert-box" role="alert">
-              The tweet can't contain more then 140 chracters!
-            </div>
-          )}
-        </form>      
-      </>
-    );
-  }
-}
+          Tweet
+        </button>
+      </div>
+      {maxLength && (
+        <div className="alert alert-danger alert-box" role="alert">
+          The tweet can't contain more then 140 chracters!
+        </div>
+      )}
+    </form>
+  );
+};
+
+export default TweetForm;

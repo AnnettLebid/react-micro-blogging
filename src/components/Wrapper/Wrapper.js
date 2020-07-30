@@ -16,6 +16,7 @@ export default class Wrapper extends React.Component {
       tweets: [],
       loading: false,
       errorMessage: "",
+      interval: null,
     };
   }
 
@@ -34,6 +35,11 @@ export default class Wrapper extends React.Component {
   }
 
   componentDidMount() {
+    this.loadTweets();
+    // this.interval
+  }
+
+  loadTweets() {
     getTweets().then((response) => {
       const { data } = response;
       this.setState({ tweets: data.tweets });
@@ -41,10 +47,15 @@ export default class Wrapper extends React.Component {
   }
 
   render() {
-    const { loading } = this.state;   
+    const { loading } = this.state;
 
     return (
-      <TweetsContext.Provider value={{ tweets: this.state.tweets }}>
+      <TweetsContext.Provider
+        value={{
+          tweets: this.state.tweets,
+          handleNewTweet: this.handleOnNewTweet,
+        }}
+      >
         <Container className="p-5">
           <Row className="justify-content-center">
             <Col xs={12} s={12} md={11} lg={7}>

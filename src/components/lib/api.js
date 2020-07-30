@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://fullstack-web-course.ew.r.appspot.com/";
+const url = "https://fullstack-web-course.ew.r.appspot.com";
 
 export function getTweets() {
   return axios.get(`${url}/tweet`);

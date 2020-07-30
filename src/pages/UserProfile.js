@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Form } from "react-bootstrap";
-import { Button } from "react-bootstrap";
-// import { Redirect } from "react-router-dom";
+import { Form, Button } from "react-bootstrap";
 
 class UserProfile extends Component {
   constructor(props) {
