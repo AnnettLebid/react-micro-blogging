@@ -1,8 +1,5 @@
 import { createContext } from 'react';
 
-const TweetsContext = createContext({
-    tweets: [],
-    handleOnNewTweet: () => {}
-});
+const TweetsContext = createContext();
 
 export default TweetsContext;

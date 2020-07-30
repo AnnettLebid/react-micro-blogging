@@ -24,7 +24,7 @@ export default class PageView extends React.Component {
     this.setState({ loading: true });
     createTweet(newTweet)
       .then((response) => {
-        this.setState((prevState) => {          
+        this.setState((prevState) => {
           return {
             tweets: [response.data, ...prevState.tweets],
             loading: false,
@@ -39,9 +39,8 @@ export default class PageView extends React.Component {
   componentDidMount() {
     this.loadTweets();
     this.interval = setInterval(() => {
-      this.loadTweets();      
-    },15000 )
-    
+      this.loadTweets();
+    }, 15000);
   }
 
   loadTweets() {
@@ -50,26 +49,26 @@ export default class PageView extends React.Component {
       this.setState({ tweets: data.tweets });
     });
   }
-  
-  componentWillUnmount() {   
+
+  componentWillUnmount() {
     clearInterval(this.interval);
   }
- 
+
   render() {
-    const { loading } = this.state;    
+    const { loading } = this.state;
 
     return (
       <TweetsContext.Provider
         value={{
           tweets: this.state.tweets,
-          handleNewTweet: this.handleOnNewTweet,
+          handleNewTweet: this.handleOnNewTweet.bind(this),
         }}
       >
         <Container className="p-5">
           <Row className="justify-content-center">
             <Col xs={12} s={12} md={11} lg={7}>
               <CreateTweet
-                handleOnNewTweet={(newTweet) => this.handleOnNewTweet(newTweet)}
+              // handleOnNewTweet={(newTweet) => this.handleOnNewTweet(newTweet)}
               />
               <div className="loader text-center">{loading && <Loader />}</div>
               {this.state.errorMessage && (

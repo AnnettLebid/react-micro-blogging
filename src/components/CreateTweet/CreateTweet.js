@@ -1,19 +1,19 @@
 import React, { useState, useContext } from "react";
 import TweetsContext from "../../TweetsContext";
 
-const CreateTweet = ({ handleOnNewTweet }) => {
+const CreateTweet = () => {
   const [newContent, setNewContent] = useState("");
   const [disabledButton, updateDisabledButton] = useState(false);
   const [maxLength, updateMaxLength] = useState(false);
 
-  // const value = useContext(TweetsContext);  
+  const context = useContext(TweetsContext);
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
     if (!newContent) {
       return;
     }
-    handleOnNewTweet ({
+    context.handleNewTweet({
       content: newContent,
       date: new Date().toISOString(),
       userName: JSON.parse(window.localStorage.getItem("userName")),
@@ -28,13 +28,10 @@ const CreateTweet = ({ handleOnNewTweet }) => {
       updateMaxLength(true);
       updateDisabledButton(true);
     }
-  };  
+  };
 
   return (
-    <form
-      className="tweet-form"
-      onSubmit={handleOnSubmit}
-    >
+    <form className="tweet-form" onSubmit={handleOnSubmit}>
       <textarea
         name="message"
         value={newContent}
