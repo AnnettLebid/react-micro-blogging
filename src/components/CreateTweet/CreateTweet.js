@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TweetsContext from "../../TweetsContext";
 
-const TweetForm = ({ handleOnNewTweet }) => {
+const CreateTweet = ({ handleOnNewTweet }) => {
   const [newContent, setNewContent] = useState("");
   const [disabledButton, updateDisabledButton] = useState(false);
   const [maxLength, updateMaxLength] = useState(false);
@@ -65,4 +65,4 @@ const TweetForm = ({ handleOnNewTweet }) => {
   );
 };
 
-export default TweetForm;
+export default CreateTweet;

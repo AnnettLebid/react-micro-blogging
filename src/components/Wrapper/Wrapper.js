@@ -2,7 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import TweetForm from "../TweetForm/TweetForm";
+import CreateTweet from "../CreateTweet/CreateTweet";
 import TweetList from "../TweetsList/TweetsList";
 import Loader from "../Loader/Loader";
 import { getTweets } from "../lib/api";
@@ -24,9 +24,11 @@ export default class Wrapper extends React.Component {
     this.setState({ loading: true });
     createTweet(newTweet)
       .then((response) => {
-        this.setState({
-          tweets: [newTweet, ...this.state.tweets],
-          loading: false,
+        this.setState((state) => {
+          return {
+            tweet: [newTweet, ...state.tweets],
+            loading: false,
+          };
         });
       })
       .catch((err) => {
@@ -59,10 +61,12 @@ export default class Wrapper extends React.Component {
         <Container className="p-5">
           <Row className="justify-content-center">
             <Col xs={12} s={12} md={11} lg={7}>
-              <TweetForm
+              <CreateTweet
                 handleOnNewTweet={(newTweet) => this.handleOnNewTweet(newTweet)}
               />
-              <div className="loader text-center">{loading && <Loader />}</div>
+              <div className="loader text-center">
+                {loading && <Loader />}
+              </div>
               {this.state.errorMessage && (
                 <h3 className="error"> {this.state.errorMessage} </h3>
               )}
