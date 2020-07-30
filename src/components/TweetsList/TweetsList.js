@@ -8,7 +8,7 @@ function TweetsList() {
       {({ tweets }) => (
         <ul className="list-style">
           {tweets.map((tweet) => (
-            <li key={tweet.id || tweet.date}>
+            <li key={tweet.id}>
               <div className="tweet-box">
                 <span className="date-position font-16-14 color-grey">
                   {tweet.date}

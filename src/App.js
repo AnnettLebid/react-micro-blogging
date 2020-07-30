@@ -1,6 +1,6 @@
 import React from "react";
 import NavigationBar from "./components/Navbar/Navbar";
-import Wrapper from "./components/Wrapper/Wrapper";
+import PageView from "./components/PageView/PageView";
 import UserProfile from "./pages/UserProfile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -12,7 +12,7 @@ function App() {
       <NavigationBar />
       <Switch>
         <Route exact path="/">
-          <Wrapper />
+          <PageView />
         </Route>
         <Route path="/profile">
           <UserProfile />

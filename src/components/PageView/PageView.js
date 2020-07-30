@@ -9,7 +9,7 @@ import { getTweets } from "../lib/api";
 import { createTweet } from "../lib/api";
 import TweetsContext from "../../TweetsContext";
 
-export default class Wrapper extends React.Component {
+export default class PageView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,9 +24,9 @@ export default class Wrapper extends React.Component {
     this.setState({ loading: true });
     createTweet(newTweet)
       .then((response) => {
-        this.setState((state) => {
+        this.setState((prevState) => {          
           return {
-            tweet: [newTweet, ...state.tweets],
+            tweets: [response.data, ...prevState.tweets],
             loading: false,
           };
         });
@@ -38,7 +38,10 @@ export default class Wrapper extends React.Component {
 
   componentDidMount() {
     this.loadTweets();
-    // this.interval
+    this.interval = setInterval(() => {
+      this.loadTweets();      
+    },15000 )
+    
   }
 
   loadTweets() {
@@ -47,9 +50,13 @@ export default class Wrapper extends React.Component {
       this.setState({ tweets: data.tweets });
     });
   }
-
+  
+  componentWillUnmount() {   
+    clearInterval(this.interval);
+  }
+ 
   render() {
-    const { loading } = this.state;
+    const { loading } = this.state;    
 
     return (
       <TweetsContext.Provider
@@ -64,9 +71,7 @@ export default class Wrapper extends React.Component {
               <CreateTweet
                 handleOnNewTweet={(newTweet) => this.handleOnNewTweet(newTweet)}
               />
-              <div className="loader text-center">
-                {loading && <Loader />}
-              </div>
+              <div className="loader text-center">{loading && <Loader />}</div>
               {this.state.errorMessage && (
                 <h3 className="error"> {this.state.errorMessage} </h3>
               )}

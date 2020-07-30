@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import TweetsContext from "../../TweetsContext";
 
 const CreateTweet = ({ handleOnNewTweet }) => {
@@ -6,7 +6,7 @@ const CreateTweet = ({ handleOnNewTweet }) => {
   const [disabledButton, updateDisabledButton] = useState(false);
   const [maxLength, updateMaxLength] = useState(false);
 
-  // static contextType = TweetsContext;
+  // const value = useContext(TweetsContext);  
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
@@ -28,9 +28,7 @@ const CreateTweet = ({ handleOnNewTweet }) => {
       updateMaxLength(true);
       updateDisabledButton(true);
     }
-  };
-
-  // const { disableButton, maxLength } = this.state;
+  };  
 
   return (
     <form
