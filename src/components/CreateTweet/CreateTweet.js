@@ -6,7 +6,7 @@ const CreateTweet = () => {
   const [disabledButton, updateDisabledButton] = useState(false);
   const [maxLength, updateMaxLength] = useState(false);
 
-  const context = useContext(TweetsContext);
+  const context = useContext(TweetsContext); 
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();

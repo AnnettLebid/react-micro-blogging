@@ -67,8 +67,7 @@ export default class PageView extends React.Component {
         <Container className="p-5">
           <Row className="justify-content-center">
             <Col xs={12} s={12} md={11} lg={7}>
-              <CreateTweet
-              // handleOnNewTweet={(newTweet) => this.handleOnNewTweet(newTweet)}
+              <CreateTweet             
               />
               <div className="loader text-center">{loading && <Loader />}</div>
               {this.state.errorMessage && (
