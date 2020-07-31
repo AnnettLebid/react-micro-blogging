@@ -2,14 +2,15 @@ import React from "react";
 import TweetsContext from "../../TweetsContext";
 import Tweet from "../Tweet/Tweet";
 
-function TweetsList() {  
-
+function TweetsList() {
   return (
     <TweetsContext.Consumer>
       {({ tweets }) => (
         <ul className="list-style">
           {tweets.map((tweet) => (
-            <Tweet {...tweet}/>           
+            <li key={tweet.id}>
+              <Tweet {...tweet} />
+            </li>
           ))}
         </ul>
       )}
