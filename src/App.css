@@ -7,11 +7,11 @@
 }
 
 body {
-  min-height: 100vh;
-  width: 100%;
+  min-height: 100vh;  
   background: #15202b;
   color: white;
   font-family: "Roboto", sans-serif;
+  overflow: hidden;
 }
 
 .tweet-form {
@@ -129,10 +129,8 @@ body {
   color: #ffffff;
 }
 
-.navbar {
-  /* width: 1076px; */
+.navbar { 
   height: 58px;
-  left: 65px;
   text-align: center;
   top: 0px;
   background: #343a40;
@@ -146,8 +144,8 @@ a:link {
 
 .home-menu {
   position: absolute;
-  width: 38px;
-  height: 16px;
+  width: 45px;
+  height: 20px;
   left: 36px;
   top: 19px;
   color: #ffffff !important;
@@ -155,11 +153,11 @@ a:link {
 
 .profile-menu {
   position: absolute;
-  width: 41px;
-  height: 16px;
+  width: 48px;
+  height: 20px;
   left: 119px;
   top: 19px;
-  color: rgba(255, 255, 255, 0.5);
+  color: #ffffff !important;
 }
 
 .loader {
@@ -183,4 +181,8 @@ a:link {
   font-size: 18px;
   line-height: 21px;
   color: rgba(255, 255, 255, 0.8);
+}
+
+.border {
+  border: red;
 }
