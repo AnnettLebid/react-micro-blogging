@@ -10,7 +10,7 @@ import TweetsContext from "../../TweetsContext";
 const PageView = () => {
   const [tweets, setTweets] = useState([]);
   const [loading, updateLoading] = useState(false);
-  const [errorMessage, updateErromessage] = ""; 
+  const [errorMessage, updateErromessage] = useState(""); 
  
   const handleOnNewTweet = (newTweet) => {
     updateLoading(true);
@@ -22,7 +22,7 @@ const PageView = () => {
       .catch((err) => {
         updateErromessage(err.message);
         updateLoading(false);
-      });
+      });     
   };
 
   useEffect(() => {
