@@ -1,80 +1,66 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import CreateTweet from "../CreateTweet/CreateTweet";
 import TweetList from "../TweetsList/TweetsList";
 import Loader from "../Loader/Loader";
-import { getTweets } from "../lib/api";
-import { createTweet } from "../lib/api";
+import { getTweets, createTweet } from "../lib/api";
 import TweetsContext from "../../TweetsContext";
+// import { getTweetsFromDb } from '../lib/firebaseApi';
 
-export default class PageView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tweets: [],
-      loading: false,
-      errorMessage: "",
-      interval: null,
-    };
-  }
-
-  handleOnNewTweet(newTweet) {
-    this.setState({ loading: true });
+const PageView = () => {
+  const [tweets, setTweets] = useState([]);
+  const [loading, updateLoading] = useState(false);
+  const [errorMessage, updateErromessage] = ""; 
+ 
+  const handleOnNewTweet = (newTweet) => {
+    updateLoading(true);
     createTweet(newTweet)
       .then((response) => {
-        this.setState((prevState) => {
-          return {
-            tweets: [response.data, ...prevState.tweets],
-            loading: false,
-          };
-        });
+        setTweets([response.data, ...tweets]);
+        updateLoading(false);
       })
       .catch((err) => {
-        this.setState({ errorMessage: err.message, loading: false });
+        updateErromessage(err.message);
+        updateLoading(false);
       });
-  }
+  };
 
-  componentDidMount() {
-    this.loadTweets();
-    this.interval = setInterval(() => {
-      this.loadTweets();
+  useEffect(() => {
+    // getTweetsFromDb();
+    loadTweets();
+    const interval = setInterval(() => {
+      loadTweets();
     }, 15000);
-  }
+    return () => clearInterval(interval);
+  }, []);
 
-  loadTweets() {
+
+  const loadTweets = () => {
     getTweets().then((response) => {
-      const { data } = response;
-      this.setState({ tweets: data.tweets });
+      const { data } = response;      
+      setTweets(data.tweets);
     });
-  }
+  };
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+  return (
+    <TweetsContext.Provider
+      value={{
+        tweets: tweets,
+        handleNewTweet: handleOnNewTweet,
+      }}
+    >
+      <Container className="p-5">
+        <Row className="justify-content-center">
+          <Col xs={12} s={12} md={11} lg={7}>
+            <CreateTweet />
+            <div className="loader text-center">{loading && <Loader />}</div>
+            {errorMessage && <h3 className="error"> {errorMessage} </h3>}
+            <TweetList />
+          </Col>
+        </Row>
+      </Container>
+    </TweetsContext.Provider>
+  );
+};
 
-  render() {
-    const { loading } = this.state;
-
-    return (
-      <TweetsContext.Provider
-        value={{
-          tweets: this.state.tweets,
-          handleNewTweet: this.handleOnNewTweet.bind(this),
-        }}
-      >
-        <Container className="p-5">
-          <Row className="justify-content-center">
-            <Col xs={12} s={12} md={11} lg={7}>
-              <CreateTweet />
-              <div className="loader text-center">{loading && <Loader />}</div>
-              {this.state.errorMessage && (
-                <h3 className="error"> {this.state.errorMessage} </h3>
-              )}
-              <TweetList />
-            </Col>
-          </Row>
-        </Container>
-      </TweetsContext.Provider>
-    );
-  }
-}
+export default PageView;

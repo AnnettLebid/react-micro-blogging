@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import TweetsContext from "../../TweetsContext";
+// import firebase from './firebase';
 
 const CreateTweet = () => {
   const [newContent, setNewContent] = useState("");
