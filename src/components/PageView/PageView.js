@@ -3,43 +3,32 @@ import { Container, Row, Col } from "react-bootstrap";
 import CreateTweet from "../CreateTweet/CreateTweet";
 import TweetList from "../TweetsList/TweetsList";
 import Loader from "../Loader/Loader";
-import { getTweets, createTweet } from "../lib/api";
 import TweetsContext from "../../TweetsContext";
-// import { getTweetsFromDb } from '../lib/firebaseApi';
+import { db } from "../../../src/firebase";
 
 const PageView = () => {
   const [tweets, setTweets] = useState([]);
   const [loading, updateLoading] = useState(false);
-  const [errorMessage, updateErromessage] = useState(""); 
- 
+  const [errorMessage, updateErromessage] = useState("");
+
   const handleOnNewTweet = (newTweet) => {
     updateLoading(true);
-    createTweet(newTweet)
-      .then((response) => {
-        setTweets([response.data, ...tweets]);
-        updateLoading(false);
-      })
-      .catch((err) => {
-        updateErromessage(err.message);
-        updateLoading(false);
-      });     
+    const { content, date, userName } = newTweet;    
+    db.collection("Tweets").add({ content, date, userName });    
   };
 
   useEffect(() => {
-    // getTweetsFromDb();
-    loadTweets();
+    loadTweetsFromDb();
     const interval = setInterval(() => {
-      loadTweets();
-    }, 15000);
+      loadTweetsFromDb();
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
-
-  const loadTweets = () => {
-    getTweets().then((response) => {
-      const { data } = response;      
-      setTweets(data.tweets);
-    });
+  const loadTweetsFromDb = async () => {
+    const data = await db.collection("Tweets").orderBy("date", "desc").get();
+    setTweets(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));   
+    updateLoading(false); 
   };
 
   return (

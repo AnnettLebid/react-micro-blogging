@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import TweetsContext from "../../TweetsContext";
-// import firebase from './firebase';
 
 const CreateTweet = () => {
   const [newContent, setNewContent] = useState("");
@@ -17,7 +16,7 @@ const CreateTweet = () => {
     context.handleNewTweet({
       content: newContent,
       date: new Date().toISOString(),
-      userName: JSON.parse(window.localStorage.getItem("userName")),
+      userName: JSON.parse(window.localStorage.getItem("userName")),      
     });
     setNewContent("");
   };
