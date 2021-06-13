@@ -1,68 +1,28 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# MicroBlogging Web App 
 
-## Available Scripts
+## Table of contents
+* [General info](#general-info)
+* [Technologies](#technologies)
 
-In the project directory, you can run:
+## General info
+A fully functional micro blogging web app. 
+It was created according to the technical documentation. The main requirements:
 
-### `yarn start`
+1. Main screen with two parts: create tweet, and tweets list Create tweet should block the tweet creation if there are more than 140 chars (need to make the button disabled) The tweets should be saved locally, so if I refresh the page they won’t be deleted the tweet list should be sorted in descending order, the latest tweet should appear first (the order should remain after refreshing the page) The username should be saved hard-coded for now (so you will be able to add it to each tweet you create).
+The design is provided through Figma.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2. Move the local app data (for keeping the data between each refresh), to a server: https://fullstack-web-course.ew.r.appspot.com/ The server has one resource exposed: “/tweet”, make requests to presenting the list of tweets, and to create a new tweet The tweet object is as follows: { content: string, userName: string, date: string (ISO date) } Save the tweet to the server on tweet post, and show the list of tweets from the server Show loading indicator, and prevent from adding a new tweet when adding request is in the background Do not forget to remove the code from the first milestone that saves the data locally, you don’t want to have them both Display server errors to the user if the tweet is not added.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+3. Features: Add another page that presents the current user username (which should be hard coded until now), and has a form to change the username. You should save the new username locally whenever changed, and send it to the server when creating a new tweet. Add a navbar to the top of the screen that keeps its position no matter which page you are at, with “Home” and “Profile” links. The design is in the second line of screen in figma (it is a private link).
 
-### `yarn test`
+4. Features: Instead of using state and props, use context for the tweets list and creating new tweet When creating new tweet, do not refresh the list, but add the tweet to the existing local list Instead set an interval that gets updates from the server of tweets, in case someone else added a tweet (to keep the list updated).
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5. Features: Add deployment to firebase so your app will be available from a remote server Create a new firebase project.
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Technologies
+Project is created with:
+* React and React Context
+* Node.js
+* React-Bootstrap
+* Firebase
+	
